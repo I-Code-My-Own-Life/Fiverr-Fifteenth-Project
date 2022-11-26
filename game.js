@@ -100,8 +100,44 @@ scissors.height = 150;
 scissors.position.set(innerWidth - 400,innerHeight - scissors.height * 2);
 let gravity = 0.1;
 let r = 0.1;
+let score = 0;
+let scoreCom = 0;
+// Our score : 
+let scoreElem = new PIXI.Text(`Your Score : ${score}`, style2);
+scoreElem.x = 100;
+scoreElem.y = innerHeight / 2 - 150;
+app.stage.addChild(scoreElem);
+// Computer's score : 
+let scoreComputer = new PIXI.Text(`AI Score : ${scoreCom}`, style2);
+scoreComputer.x = innerWidth / 2 + 150;
+scoreComputer.y = innerHeight / 2 - 150;
+app.stage.addChild(scoreComputer);
+// Let's draw our restart button : 
+// Let's draw the button : 
+let bX = 530;
+let bY = 300;
+let bWidth = 150;
+let bHeight  = 60;
+let bRadius = 30;
+let restartButton = new PIXI.Graphics();
+restartButton.beginFill(0x3e494b);
+restartButton.lineStyle(4, 0x0, .3);
+restartButton.drawRoundedRect(
+    bX,
+    bY,
+    bWidth,
+    bHeight,
+    bRadius
+);
+restartButton.endFill();
+// The text in the button : 
+const text3 = new PIXI.Text("Restart", style2)
+text3.x  = buttonX + (bWidth / 4);
+text3.y  = buttonY + (bHeight / 4);
 // Our animation loop : 
 app.ticker.add((delta) => {
+    scoreElem.text = `Your Score : ${score}`;
+    scoreComputer.text = `Computer's Score : ${scoreCom}`;
     if(text.style != null){
         if(text.style.fontSize < 50){
             text.y  = 50;       
@@ -159,6 +195,8 @@ let texts = [];
 button.interactive = true;
 button.on("pointerdown",function (){
     moveButton = true;
+    app.stage.addChild(restartButton);
+    app.stage.addChild(text3);
 })
 rock.interactive = true;
 let i = 0;
@@ -204,6 +242,7 @@ rock.on("pointerdown",function (){
             text2.y  = innerHeight / 2 - 150;
             texts.push(text2);
             app.stage.addChild(text2);
+            score++;
         }
         else if(randomOption == "paper"){
             console.log("You Lost !!!");
@@ -212,6 +251,7 @@ rock.on("pointerdown",function (){
             text2.y  = innerHeight / 2 - 150;
             texts.push(text2);
             app.stage.addChild(text2);
+            scoreCom++;
         }
 
         if(i > 0){
@@ -267,6 +307,7 @@ paper.on("pointerdown",function (){
             text2.y  = innerHeight / 2 - 150;
             texts.push(text2);
             app.stage.addChild(text2);
+            score++;
         }
         else if(randomOption == "scissors"){
             console.log("You Lost !!!");
@@ -275,6 +316,7 @@ paper.on("pointerdown",function (){
             text2.y  = innerHeight / 2 - 150;
             texts.push(text2);
             app.stage.addChild(text2);
+            scoreCom++;
         }
         else if(randomOption == "paper"){
             app.stage.addChild(text2);
@@ -339,6 +381,7 @@ scissors.on("pointerdown",function (){
             text2.y  = innerHeight / 2 - 150;
             texts.push(text2);
             app.stage.addChild(text2);
+            scoreCom++;
         }
         else if(randomOption == "scissors"){
             app.stage.addChild(text2);
@@ -356,6 +399,7 @@ scissors.on("pointerdown",function (){
             text2.y  = innerHeight / 2 - 150;
             texts.push(text2);
             app.stage.addChild(text2);
+            score++;
         }
         if(k > 0){
             // previousChosenPlayer.push(scissors);
@@ -375,7 +419,10 @@ scissors.on("pointerdown",function (){
         previousChosenComputer.push(comOption);
     }
 })
-
-setTimeout(()=>{
-
-},4000)
+// Restarting the game : 
+// First the making the restart button interactive :
+restartButton.interactive = true;
+restartButton.on("pointerdown",function (){
+    console.log("Reload the game !!!")
+    location.reload();
+})
