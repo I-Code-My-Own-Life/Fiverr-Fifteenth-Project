@@ -45,7 +45,7 @@ let style3 = new PIXI.TextStyle({
     strokeThickness:2,
 })
 const text = new PIXI.Text("Rock Paper Scissors !", style);
-text.x  = ((innerWidth / 2) - text.width / 2);
+text.x  = innerWidth / 2 - text.width * 2;
 text.y  = 50;
 app.stage.addChild(text);
 
@@ -85,25 +85,26 @@ let rock = PIXI.Sprite.from('./Assets/rock.png');
 app.stage.addChild(rock);
 rock.width = 80;
 rock.height = 150;
-rock.position.set(200,500);
+rock.position.set(200,innerHeight - rock.height * 2);
                         // Paper : 
 let paper = PIXI.Sprite.from('./Assets/paper.png');
 app.stage.addChild(paper);
 paper.width = 80;
 paper.height = 150;
-paper.position.set(innerWidth / 2,500);
+paper.position.set(innerWidth / 2 - paper.width,innerHeight -paper.height * 2);
                         // Scissors : 
 let scissors = PIXI.Sprite.from('./Assets/scissors.png');
 app.stage.addChild(scissors);
 scissors.width = 80;
 scissors.height = 150;
-scissors.position.set(innerWidth - 200,500);
+scissors.position.set(innerWidth - 400,innerHeight - scissors.height * 2);
 let gravity = 0.1;
 let r = 0.1;
 // Our animation loop : 
 app.ticker.add((delta) => {
     if(text.style != null){
         if(text.style.fontSize < 50){
+            text.y  = 50;       
             text.x -= 7.5;
             text.style.fontSize += 1.5;
         }
@@ -191,7 +192,7 @@ rock.on("pointerdown",function (){
         if(randomOption == "rock"){
             console.log("This is draw !!!");
             let text2 = new PIXI.Text("Draw", style3)
-            text2.x  = innerWidth / 2 - text2.style.fontSize;
+            text2.x  = innerWidth / 2 - text2.width;
             text2.y  = innerHeight / 2 - 150;
             texts.push(text2);
             app.stage.addChild(text2);
@@ -199,7 +200,7 @@ rock.on("pointerdown",function (){
         else if(randomOption == "scissors"){
             console.log("You Won !!!");
             let text2 = new PIXI.Text("You Won !!!", style3)
-            text2.x  = innerWidth / 2 - text2.style.fontSize ;
+            text2.x  = innerWidth / 2 - text2.width;
             text2.y  = innerHeight / 2 - 150;
             texts.push(text2);
             app.stage.addChild(text2);
@@ -207,7 +208,7 @@ rock.on("pointerdown",function (){
         else if(randomOption == "paper"){
             console.log("You Lost !!!");
             let text2 = new PIXI.Text("You Lost !!!", style3)
-            text2.x  = innerWidth / 2 - text2.style.fontSize;
+            text2.x  = innerWidth / 2 - text2.width;
             text2.y  = innerHeight / 2 - 150;
             texts.push(text2);
             app.stage.addChild(text2);
@@ -262,7 +263,7 @@ paper.on("pointerdown",function (){
         if(randomOption == "rock"){
             console.log("You Won !!!");
             let text2 = new PIXI.Text("You Won !!!", style3)
-            text2.x  = innerWidth / 2 - text2.style.fontSize ;
+            text2.x  = innerWidth / 2 - text2.width;
             text2.y  = innerHeight / 2 - 150;
             texts.push(text2);
             app.stage.addChild(text2);
@@ -270,7 +271,7 @@ paper.on("pointerdown",function (){
         else if(randomOption == "scissors"){
             console.log("You Lost !!!");
             let text2 = new PIXI.Text("You Lost !!!", style3)
-            text2.x  = innerWidth / 2 - text2.style.fontSize;
+            text2.x  = innerWidth / 2 - text2.width;
             text2.y  = innerHeight / 2 - 150;
             texts.push(text2);
             app.stage.addChild(text2);
@@ -279,7 +280,7 @@ paper.on("pointerdown",function (){
             app.stage.addChild(text2);
             console.log("This is draw !!!");
             let text2 = new PIXI.Text("Draw", style3)
-            text2.x  = innerWidth / 2 - text2.style.fontSize;
+            text2.x  = innerWidth / 2 - text2.width;
             text2.y  = innerHeight / 2 - 150;
             texts.push(text2);
             app.stage.addChild(text2);
@@ -334,7 +335,7 @@ scissors.on("pointerdown",function (){
         if(randomOption == "rock"){
             console.log("You Lost !!!");
             let text2 = new PIXI.Text("You Lost !!!", style3)
-            text2.x  = innerWidth / 2 - text2.style.fontSize;
+            text2.x  = innerWidth / 2 - text2.width;
             text2.y  = innerHeight / 2 - 150;
             texts.push(text2);
             app.stage.addChild(text2);
@@ -343,7 +344,7 @@ scissors.on("pointerdown",function (){
             app.stage.addChild(text2);
             console.log("This is draw !!!");
             let text2 = new PIXI.Text("Draw", style3)
-            text2.x  = innerWidth / 2 - text2.style.fontSize;
+            text2.x  = innerWidth / 2 - text2.width;
             text2.y  = innerHeight / 2 - 150;
             texts.push(text2);
             app.stage.addChild(text2);
@@ -351,7 +352,7 @@ scissors.on("pointerdown",function (){
         else if(randomOption == "paper"){
             console.log("You Won !!!");
             let text2 = new PIXI.Text("You Won !!!", style3)
-            text2.x  = innerWidth / 2 - text2.style.fontSize ;
+            text2.x  = innerWidth / 2 - text2.width;
             text2.y  = innerHeight / 2 - 150;
             texts.push(text2);
             app.stage.addChild(text2);
