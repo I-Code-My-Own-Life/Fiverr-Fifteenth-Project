@@ -45,7 +45,7 @@ let style3 = new PIXI.TextStyle({
     strokeThickness:2,
 })
 const text = new PIXI.Text("Rock Paper Scissors !", style);
-text.x  = innerWidth / 2 - text.width * 2;
+text.x  = ((innerWidth / 2) - text.width * 2 );
 text.y  = 50;
 app.stage.addChild(text);
 
